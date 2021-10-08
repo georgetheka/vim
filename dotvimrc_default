@@ -1,0 +1,114 @@
+set nocompatible                  " Must come first because it changes other options.
+set mouse=a                       " Turn on mouse
+set showcmd                       " Display incomplete commands.
+set showmode                      " Display the mode you're in.
+set backspace=indent,eol,start    " Intuitive backspacing.
+set hidden                        " Handle multiple buffers better.
+set wildmenu                      " Enhanced command line completion.
+set wildmode=list:longest         " Complete files like a shell.
+set ignorecase                    " Case-insensitive searching.
+set smartcase                     " But case-sensitive if expression contains a capital letter.
+set number                        " Show line numbers.
+set ruler                         " Show cursor position.
+set incsearch                     " Highlight matches as you type.
+set hlsearch                      " Highlight matches.
+set wrap                          " Turn on line wrapping.
+set scrolloff=3                   " Show 3 lines of context around the cursor.
+set title                         " Set the terminal's title
+set visualbell                    " No beeping.
+set nobackup                      " Don't make a backup before overwriting a file.
+set nowritebackup                 " And again.
+set directory=/Users/george/.vim/tmp//,.  " Keep swap files in one location
+set tabstop=2                     " Global tab width.
+set shiftwidth=2                  " And again, related.
+set expandtab                     " Use spaces instead of tabs
+set autoindent                    " sets autoindent
+set laststatus=2                  " Show the status line all the time
+set splitbelow                    " Window splits are on the bottom
+set splitright                    " Window splits are on the right side
+set foldmethod=indent             " folding
+set foldlevel=99
+set backupdir=.backup/,~/.backup/,/tmp//
+set directory=.swp/,~/.swp/,/tmp//
+set undodir=.undo/,~/.undo/,/tmp//
+set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P " statusline
+set autowrite
+set encoding=utf-8
+
+nnoremap <space> za               " Enable folding with the spacebar
+nnoremap <leader>. :CtrlPTag<cr>  " ctags mappings
+map <C-n> :NERDTreeToggle<CR>
+imap <S-Tab> <C-n>
+map <Leader>\ :NERDTreeToggle<CR>
+map <Leader>b :CtrlP<CR>
+nmap <Leader>t :TagbarToggle<CR>
+map <Leader>c :w !pbcopy<CR>
+map <Leader>v :r !pbpaste<CR>
+
+let NERDTreeShowHidden=1
+
+" Tab mappings.
+map <leader>tt :tabnew<cr>
+map <leader>te :tabedit
+map <leader>tc :tabclose<cr>
+map <leader>to :tabonly<cr>
+map <leader>tn :tabnext<cr>
+map <leader>tp :tabprevious<cr>
+map <leader>tf :tabfirst<cr>
+map <leader>tl :tablast<cr>
+map <leader>tm :tabmove
+
+" Color Scheme
+let g:rehash256 = 1
+let g:molokai_original = 1
+colorscheme molokai
+
+" vim-syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" vim-go
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+
+let g:rustfmt_autosave = 1 " rust format
+
+" clang_complete
+let g:clang_library_path='/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libclang.dylib'
+
+" python
+let python_highlight_all=1
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
+au BufNewFile,BufRead *.py
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+" front-end
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2 |
+    \ set softtabstop=2 |
+    \ set shiftwidth=2
+
+" Syntax highlighting
+syntax enable                     " Turn on syntax highlighting.
+filetype plugin indent on         " Turn on file type detection.
